@@ -112,7 +112,7 @@ const Quiz = () => {
       <footer className="bg-phishguard-deep-blue">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <p className="text-center text-white text-sm">
-            © 2025 PhishGuard – Campus Anti-Phishing. Tous droits réservés.
+            © 2025 SurfSafe – Campus Anti-Phishing. Tous droits réservés.
           </p>
         </div>
       </footer>

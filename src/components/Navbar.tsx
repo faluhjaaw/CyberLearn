@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, Menu, X, ChevronRight, Lock, ShieldAlert } from "lucide-react";
 import { 
@@ -18,6 +18,13 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +74,7 @@ export default function Navbar() {
                 </span>
               </div>
               <span className="ml-2 text-xl font-bold bg-gradient-to-r from-cybersec-blue to-cybersec-tech-purple bg-clip-text text-transparent">
-                PhishGuard
+                SurfSafe
               </span>
             </Link>
           </div>
@@ -100,13 +107,22 @@ export default function Navbar() {
             </NavigationMenu>
             
             <div className="ml-6 flex items-center">
-              <Button 
-                variant="outline"
-                className="text-cybersec-blue border-cybersec-blue hover:bg-cybersec-soft-blue hover:text-cybersec-dark-blue flex items-center gap-2"
-              >
-                <Lock size={16} />
-                <span>Se connecter</span>
-              </Button>
+              {!token ? (
+                  <Button 
+                    variant="outline"
+                    className="text-cybersec-blue border-cybersec-blue hover:bg-cybersec-soft-blue hover:text-cybersec-dark-blue flex items-center gap-2">
+                    <Lock size={16} />
+                    <span><Link to="/login">Se connecter</Link></span>
+                  </Button>
+                ) : (
+                  <Button 
+                    onClick={handleLogout}
+                    className="bg-transparent text-red-900 border-cybersec-blue hover:bg-cybersec-soft-blue hover:text-cybersec-dark-blue flex items-center gap-2">
+                    <span>Se déconnecter</span>
+                  </Button>
+                )
+              }
+              
             </div>
           </div>
 
@@ -156,7 +172,7 @@ export default function Navbar() {
                 className="w-full bg-cybersec-blue hover:bg-cybersec-dark-blue flex items-center justify-center gap-2"
               >
                 <Lock size={16} />
-                <span>Se connecter</span>
+                <span><Link to="/login">Se connecter</Link></span>
               </Button>
             </div>
           </div>
