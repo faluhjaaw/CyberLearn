@@ -34,7 +34,7 @@ const SignupPage = () => {
     }
     
     try {
-      await axios.post("http://localhost:8000/api/register/", formData);
+      await axios.post("https://backend-surf-safe.onrender.com/api/register/", formData);
       alert("Inscription réussie !");
       navigate("/login");
     } catch (error: any) {
